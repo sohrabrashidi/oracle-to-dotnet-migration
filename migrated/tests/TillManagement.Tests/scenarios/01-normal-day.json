@@ -1,0 +1,12 @@
+{
+  "description": "Cashier opens with KWD and USD floats, serves customers, counts exactly.",
+  "steps": [
+    { "action": "open", "till": "t1", "branch": "fahaheel", "cashier": "ali", "amounts": { "KWD": 500.000, "USD": 2000.00 } },
+    { "action": "move", "till": "t1", "currency": "USD", "type": "OUT", "amount": 300, "reference": "EX-1001" },
+    { "action": "move", "till": "t1", "currency": "KWD", "type": "IN",  "amount": 91.950, "reference": "EX-1001" },
+    { "action": "move", "till": "t1", "currency": "KWD", "type": "IN",  "amount": 250.000, "reference": "TR-2231" },
+    { "action": "cash", "till": "t1", "currency": "KWD", "expect": { "cash": 841.950 } },
+    { "action": "close", "till": "t1", "amounts": { "KWD": 841.950, "USD": 1700.00 },
+      "expect": { "status": "BALANCED", "variances": { "KWD": 0, "USD": 0 } } }
+  ]
+}

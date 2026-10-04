@@ -1,0 +1,11 @@
+{
+  "description": "A currency received during the day without an opening float must still be counted.",
+  "steps": [
+    { "action": "open", "till": "t1", "branch": "jahra", "cashier": "fatma", "amounts": { "KWD": 100 } },
+    { "action": "move", "till": "t1", "currency": "SAR", "type": "IN", "amount": 500 },
+    { "action": "cash", "till": "t1", "currency": "SAR", "expect": { "cash": 500 } },
+    { "action": "move", "till": "t1", "currency": "SAR", "type": "OUT", "amount": 120.50 },
+    { "action": "close", "till": "t1", "amounts": { "KWD": 100, "SAR": 379.50 },
+      "expect": { "status": "BALANCED", "variances": { "SAR": 0 } } }
+  ]
+}

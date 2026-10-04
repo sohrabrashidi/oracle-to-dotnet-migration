@@ -1,0 +1,14 @@
+{
+  "description": "Error paths keep the legacy ORA-200xx codes.",
+  "steps": [
+    { "action": "open", "till": "t1", "branch": "city", "cashier": "huda", "amounts": { "KWD": 50 } },
+    { "action": "open", "till": "t2", "branch": "city", "cashier": "HUDA", "amounts": { "KWD": 50 }, "expect": { "error": 20001 } },
+    { "action": "move", "till": "t1", "currency": "KWD", "type": "OUT", "amount": 50.001, "expect": { "error": 20003 } },
+    { "action": "move", "till": "t1", "currency": "USD", "type": "IN", "amount": 100 },
+    { "action": "close", "till": "t1", "amounts": { "KWD": 50 }, "expect": { "error": 20004 } },
+    { "action": "close", "till": "t1", "amounts": { "KWD": 50, "USD": null }, "expect": { "error": 20004 } },
+    { "action": "close", "till": "t1", "amounts": { "KWD": 50, "USD": 100 }, "expect": { "status": "BALANCED" } },
+    { "action": "move", "till": "t1", "currency": "KWD", "type": "IN", "amount": 1, "expect": { "error": 20002 } },
+    { "action": "open", "till": "t3", "branch": "city", "cashier": "huda", "amounts": { "KWD": 50 } }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "description": "Variance within the 0.500 tolerance still closes as BALANCED.",
+  "steps": [
+    { "action": "open", "till": "t1", "branch": "salmiya", "cashier": "noor", "amounts": { "KWD": 200 } },
+    { "action": "move", "till": "t1", "currency": "KWD", "type": "IN", "amount": 45.125 },
+    { "action": "close", "till": "t1", "amounts": { "KWD": 244.750 },
+      "expect": { "status": "BALANCED", "variances": { "KWD": -0.375 } } }
+  ]
+}

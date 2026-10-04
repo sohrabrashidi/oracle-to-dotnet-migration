@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: migrated
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: till
+          POSTGRES_PASSWORD: till
+          POSTGRES_DB: till
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U till"
+          --health-interval 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Apply PostgreSQL schema
+        run: psql "postgresql://till:till@localhost:5432/till" -v ON_ERROR_STOP=1 -f db/V1__till_schema.sql
+
+      - name: Build
+        run: dotnet build TillManagement.slnx -c Release
+
+      - name: Test
+        env:
+          TILL_PG: Host=localhost;Database=till;Username=till;Password=till
+        run: dotnet test TillManagement.slnx --no-build -c Release --logger "console;verbosity=normal"

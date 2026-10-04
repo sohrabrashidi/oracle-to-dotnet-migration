@@ -1,0 +1,8 @@
+{
+  "description": "One currency over, another short: the till is SHORT.",
+  "steps": [
+    { "action": "open", "till": "t1", "branch": "hawally", "cashier": "omar", "amounts": { "KWD": 300, "EUR": 1000 } },
+    { "action": "close", "till": "t1", "amounts": { "EUR": 1005, "KWD": 298.000 },
+      "expect": { "status": "SHORT", "variances": { "EUR": 5, "KWD": -2 } } }
+  ]
+}

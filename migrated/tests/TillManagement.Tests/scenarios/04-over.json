@@ -1,0 +1,8 @@
+{
+  "description": "More cash than expected.",
+  "steps": [
+    { "action": "open", "till": "t1", "branch": "hawally", "cashier": "omar", "amounts": { "KWD": 300 } },
+    { "action": "close", "till": "t1", "amounts": { "KWD": 301.250 },
+      "expect": { "status": "OVER", "variances": { "KWD": 1.25 } } }
+  ]
+}

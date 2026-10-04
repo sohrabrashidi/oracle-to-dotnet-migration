@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TillManagement.Core/TillManagement.Core.csproj" />
+    <Project Path="src/TillManagement.Postgres/TillManagement.Postgres.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TillManagement.Tests/TillManagement.Tests.csproj" />
+  </Folder>
+</Solution>
